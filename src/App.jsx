@@ -75,9 +75,22 @@ const AppTest = () => {
 
     const notesToShow = showAll ? notes : notes.filter( note => note.important === true)
 
-    const handleLogin = (event) => {
-        event.preventDefault()
-        console.log('logging in with', username, password)
+    const handleLogin = async (event) => {
+      event.preventDefault()
+      
+      try {
+        const user = await loginService.login({
+          username, password,
+        })
+        setUser(user)
+        setUsername('')
+        setPassword('')
+      } catch (exception) {
+        setErrorMessage('Wrong credentials')
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000)
+      }
     }
 
 return (
