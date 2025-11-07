@@ -4,5 +4,5 @@ import AppTest from "./AppTest"
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <AppTest/>
+  <App/>
 )

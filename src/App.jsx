@@ -18,7 +18,7 @@ const Footer = () => {
   )
 }
 
-const AppTest = () => {
+const App = () => {
     const [notes, setNotes] = useState([])
     const [newNote, setNewNote] = useState('')
     const [showAll, setShowAll] =useState(true)
@@ -137,4 +137,4 @@ return (
     )        
 }
 
-export default AppTest;
+export default App;
