@@ -132,8 +132,13 @@ return (
         <h1>Notes</h1>
         <Notification message={errorMessage}/>
         
-        {user === null && loginForm()}
-        {user !== null && noteForm()}
+        {!user && loginForm()} 
+        {user && <div>
+          <p>{user.name} logged in</p>
+            {noteForm()}
+          </div>
+        }
+
         <div>
             <button onClick={() => setShowAll(!showAll)}>
                 Show {showAll ? 'Important' : 'all'}
