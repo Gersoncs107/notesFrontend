@@ -73,6 +73,11 @@ const AppTest = () => {
 
     const notesToShow = showAll ? notes : notes.filter( note => note.important === true)
 
+    const handleLogin = (event) => {
+        event.preventDefault()
+        console.log('logging in with', username, password)
+    }
+
 return (
     <div>
         <h1>Notes</h1>
