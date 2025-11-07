@@ -96,10 +96,27 @@ return (
           />
         )}
         </ul>
-            <form onSubmit={addNote}>
-                <input value={newNote} onChange={handleNoteChange}/>
-                <button type="submit">Save</button>
-            </form>
+            <form onSubmit={handleLogin}>
+        <div>
+          username
+            <input
+            type="text"
+            value={username}
+            name="Username"
+            onChange={({ target }) => setUsername(target.value)}
+          />
+        </div>
+        <div>
+          password
+            <input
+            type="password"
+            value={password}
+            name="Password"
+            onChange={({ target }) => setPassword(target.value)}
+          />
+        </div>
+        <button type="submit">login</button>
+      </form>
         <Footer/>
     </div>
     )        
