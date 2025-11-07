@@ -22,6 +22,8 @@ const AppTest = () => {
     const [newNote, setNewNote] = useState('')
     const [showAll, setShowAll] =useState(true)
     const [errorMessage, setErrorMessage] = useState('Some error happened...')
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
 
     useEffect(() => {
     noteService
