@@ -35,19 +35,29 @@ const App = () => {
       })
   }, [])
 
-    const addNote = (event) => {
+    const addNote = async (event) => {
         event.preventDefault()
+
+        if (!newNote || newNote.trim() === '') {
+          setErrorMessage('Note content cannot be empty')
+          setTimeout(() => setErrorMessage(null), 3000)
+          return
+        }
+
         const noteObject = {
             content: newNote,
             important: Math.random() < 0.5
         }
 
-        noteService.create(noteObject)
-        .then((returnedNote) => {
-            setNotes(notes.concat(returnedNote))
-            setNewNote('')
-        })
-
+        try {
+          const returnedNote = await noteService.create(noteObject)
+          setNotes(notes.concat(returnedNote))
+          setNewNote('')
+        } catch (error) {
+          console.error('Failed to create note:', error)
+          setErrorMessage('Failed to save note (check server).')
+          setTimeout(() => setErrorMessage(null), 5000)
+        }
     }
 
     const toggleImportanceOf = id => {
@@ -149,12 +159,14 @@ return (
           <h2>Notes</h2>
         <ul>
             {notesToShow.map(note => 
-          <Note
-            key={note.id}
-            note={note} 
-            toggleImportance={() => toggleImportanceOf(note.id)}
-          />
-        )}
+              note
+                ? <Note
+                    key={note.id}
+                    note={note} 
+                    toggleImportance={() => toggleImportanceOf(note.id)}
+                  />
+                : null
+            )}
         </ul>
             {/* <form onSubmit={handleLogin}>
         <div>
