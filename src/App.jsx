@@ -144,6 +144,8 @@ return (
                 Show {showAll ? 'Important' : 'all'}
             </button>
         </div>
+
+          <h2>Notes</h2>
         <ul>
             {notesToShow.map(note => 
           <Note
