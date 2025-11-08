@@ -3,6 +3,10 @@ const baseUrl = "/api/notes";
 
 let token = null
 
+const setToken = newToken => {
+  token = `Bearer ${newToken}`
+}
+
 const getAll = () => {
   const request = axios.get(baseUrl);
   return request.then((response) => response.data);
