@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Note, Notification } from "./components/Note";
 import noteService from './services/notes'
 import loginService from './services/login'
+import LoginForm from "./components/LoginForm";
 
 const Footer = () => {
   const footerStyle = {
