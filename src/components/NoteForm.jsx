@@ -13,3 +13,4 @@ const NoteForm = ({ onSubmit, handleChange, value}) => {
     </div>
   )
 }
+export default NoteForm

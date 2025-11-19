@@ -19,4 +19,5 @@ const Notification = ({message}) => {
         </div>
     )
 }
-export { Note, Notification };
+export default Note
+export { Notification }
