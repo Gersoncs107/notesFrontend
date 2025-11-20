@@ -58,7 +58,13 @@ const App = () => {
 
   const noteFormRef = useRef()
 
-   const addNote = (noteObject) => {
+  const noteForm = () => (
+    <Togglable buttonLabel="new note" ref={noteFormRef}>
+      <NoteForm createNote={addNote} />
+    </Togglable>
+  )
+
+  const addNote = (noteObject) => {
     noteService
       .create(noteObject)
       .then(returnedNote => {
