@@ -56,6 +56,8 @@ const App = () => {
     }
   }
 
+  const noteFormRef = useRef()
+
    const addNote = (noteObject) => {
     noteService
       .create(noteObject)
