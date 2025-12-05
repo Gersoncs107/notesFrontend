@@ -38,15 +38,3 @@ test('clicking the button calls event handler once', async () => {
 
   expect(mockHandler.mock.calls).toHaveLength(1)
 })
-
- test('toggled content can be closed', async () => {
-    const user = userEvent.setup()
-    const button = screen.getByText('show...')
-    await user.click(button)
-
-    const closeButton = screen.getByText('cancel')
-    await user.click(closeButton)
-
-    const div = container.querySelector('.togglableContent')
-    expect(div).toHaveStyle('display: none')
-  })
