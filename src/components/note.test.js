@@ -2,7 +2,6 @@ import React from 'react'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Note from './Note'
-import Togglable from './Togglable'
 
 test('renders content', () => {
   const note = {
@@ -12,13 +11,8 @@ test('renders content', () => {
 
   render(<Note note={note} />)
 
-  const element = screen.getByText('Component testing is done with react-testing-library')
-
-  screen.debug(element)
-  
-  expect(element).toBeDefined()
+  expect(screen.getByText(/Component testing is done with react-testing-library/)).toBeInTheDocument()
 })
-
 
 test('clicking the button calls event handler once', async () => {
   const note = {
@@ -28,13 +22,22 @@ test('clicking the button calls event handler once', async () => {
 
   const mockHandler = jest.fn()
 
-  render(
-    <Note note={note} toggleImportance={mockHandler} />
-  )
+  render(<Note note={note} toggleImportance={mockHandler} />)
 
   const user = userEvent.setup()
   const button = screen.getByText('make not important')
   await user.click(button)
 
   expect(mockHandler.mock.calls).toHaveLength(1)
+})
+
+test('renders another note', () => {
+  const note = {
+    content: 'Does not work anymore :(',
+    important: false
+  }
+
+  render(<Note note={note} />)
+
+  expect(screen.getByText(/Does not work anymore/)).toBeInTheDocument()
 })
