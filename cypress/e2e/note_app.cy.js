@@ -11,11 +11,11 @@ describe('Note app', function() {
   })
 
   it('user can login', function() {
-    cy.visit('http://localhost:5173/')
     cy.contains('log in').click()
     cy.get('#username').type('root')
     cy.get('#password').type('salainen')
-    cy.get('#login-button').click()
-    cy.contains('Matti Luukkainen logged-in')
+    cy.get('login').click()
+
+    cy.contains('Superuser logged in')
   })
 })
