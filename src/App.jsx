@@ -56,6 +56,11 @@ const App = () => {
     }
   }
 
+  const handleLogout = () => {
+    window.localStorage.removeItem('loggedNoteappUser')
+    setUser(null)
+  }
+
   const noteFormRef = useRef()
 
   const noteForm = () => (
@@ -114,7 +119,7 @@ const App = () => {
       }
       {user &&
         <div>
-          <p>{user.name} logged in</p>
+          <p>{user.name} logged in <button>logout</button></p>
           {noteForm()}
         </div>
       }
