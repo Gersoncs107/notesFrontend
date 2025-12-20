@@ -19,4 +19,21 @@ describe('Note app', function() {
 
     cy.contains('Superuser logged in')
   })
+
+  describe('when logged in', function() {
+    beforeEach(function() {
+      cy.visit('http://localhost:5173/')
+      cy.contains('log in').click()
+      cy.get('#username').type('root')
+      cy.get('#password').type('salainen')
+      cy.get('#login-button').click()
+    })
+
+    it('a new note can be created', function() {
+      cy.contains('new note').click()
+      cy.get('#note-input').type('a note created by cypress')
+      cy.contains('save').click()
+      cy.contains('a note created by cypress')
+    })
+  })
 })
