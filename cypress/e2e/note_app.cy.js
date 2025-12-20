@@ -27,6 +27,7 @@ describe('Note app', function() {
       cy.get('#username').type('root')
       cy.get('#password').type('salainen')
       cy.get('#login-button').click()
+      cy.contains('Superuser logged in').should('be.visible')
     })
 
     it('a new note can be created', function() {
