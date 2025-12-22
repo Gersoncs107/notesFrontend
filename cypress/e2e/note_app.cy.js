@@ -1,4 +1,15 @@
 describe('Note app', function() {
+  beforeEach(function() {
+    cy.request('POST', 'http://localhost:5173/api/testing/reset')
+    const user = {
+      name: 'Superuser',
+      username: 'root',
+      password: 'salainen'
+    }
+    cy.request('POST', 'http://localhost:5173/api/users/', user)
+    cy.visit('http://localhost:5173/')
+  })
+
   it('front page can be opened', function() {
     cy.visit('http://localhost:5173/')
     cy.contains('Notes')
