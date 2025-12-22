@@ -74,7 +74,12 @@ describe('Note app', function() {
     cy.get('#password').type('wrong')
     cy.get('#login-button').click()
 
-    cy.get('.error').contains('wrong credentials')
+    cy.get('.error')
+      .should('contain', 'wrong credentials')
+      .and('have.css', 'color', 'rgb(255, 0, 0)')
+      .and('have.css', 'border-style', 'solid')
+
+    cy.get('html').should('not.contain', 'Superuser logged in')
   })
 })
 
