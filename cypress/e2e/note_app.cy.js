@@ -50,3 +50,5 @@ describe('Note app', function() {
     })
   })
 })
+
+//npm run cypress:open
