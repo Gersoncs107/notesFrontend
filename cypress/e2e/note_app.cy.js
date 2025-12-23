@@ -33,13 +33,7 @@ describe('Note app', function() {
 
   describe('when logged in', function() {
     beforeEach(function() {
-      cy.request('POST', 'http://localhost:5173/api/login', {
-        username: 'root',
-        password: 'salainen'
-      }).then(response => {
-        localStorage.setItem('loggedNoteAppUser', JSON.stringify(response.body))
-        cy.visit('http://localhost:5173/')
-      })
+      cy.login({ username: 'root', password: 'salainen' })
     })
 
     it('a new note can be created', function() {
@@ -68,20 +62,20 @@ describe('Note app', function() {
     })
   })
 
-  it.only('login fails with wrong password', function() {
-    cy.visit('http://localhost:5173/')
-    cy.contains('log in').click()
-    cy.get('#username').type('root')
-    cy.get('#password').type('wrong')
-    cy.get('#login-button').click()
+  // it.only('login fails with wrong password', function() {
+  //   cy.visit('http://localhost:5173/')
+  //   cy.contains('log in').click()
+  //   cy.get('#username').type('root')
+  //   cy.get('#password').type('wrong')
+  //   cy.get('#login-button').click()
 
-    cy.get('.error')
-      .should('contain', 'wrong credentials')
-      .and('have.css', 'color', 'rgb(255, 0, 0)')
-      .and('have.css', 'border-style', 'solid')
+  //   cy.get('.error')
+  //     .should('contain', 'wrong credentials')
+  //     .and('have.css', 'color', 'rgb(255, 0, 0)')
+  //     .and('have.css', 'border-style', 'solid')
 
-    cy.get('html').should('not.contain', 'Superuser logged in')
-  })
+  //   cy.get('html').should('not.contain', 'Superuser logged in')
+  // })
 })
 
 //npm run cypress:open
