@@ -33,12 +33,13 @@ describe('Note app', function() {
 
   describe('when logged in', function() {
     beforeEach(function() {
-      cy.visit('http://localhost:5173/')
-      cy.contains('log in').click()
-      cy.get('#username').type('root')
-      cy.get('#password').type('salainen')
-      cy.get('#login-button').click()
-      cy.contains('Superuser logged in').should('be.visible')
+      cy.request('POST', 'http://localhost:5173/api/login', {
+        username: 'root',
+        password: 'salainen'
+      }).then(response => {
+        localStorage.setItem('loggedNoteAppUser', JSON.stringify(response.body))
+        cy.visit('http://localhost:5173/')
+      })
     })
 
     it('a new note can be created', function() {
