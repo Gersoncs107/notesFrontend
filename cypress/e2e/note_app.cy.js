@@ -36,7 +36,7 @@ describe('Note app', function() {
       cy.login({ username: 'root', password: 'salainen' })
     })
 
-    it('a new note can be created', function() {
+    it.only('a new note can be created', function() {
       cy.contains('new note').click()
       cy.get('#note-input').should('be.visible')
       cy.get('#note-input').type('a note created by cypress')
