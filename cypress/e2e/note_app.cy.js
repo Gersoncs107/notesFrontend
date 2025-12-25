@@ -7,11 +7,11 @@ describe('Note app', function() {
       password: 'salainen'
     }
     cy.request('POST', `${Cypress.env('BACKEND')}/users`, user)
-    cy.visit('http://localhost:5173/')
+    cy.visit('')
   })
 
   it('front page can be opened', function() {
-    cy.visit('http://localhost:5173/')
+    cy.visit('')
     cy.contains('Notes')
     cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
   })
