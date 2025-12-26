@@ -1,6 +1,6 @@
 describe('Note app', function() {
   beforeEach(function() {
-    cy.request('POST', `${Cypress.env('BACKEND')}/testing/reset`)
+    cy.request('POST', `${Cypress.env('BACKEND')}/api/testing/reset`)
     const user = {
       name: 'Superuser',
       username: 'root',
