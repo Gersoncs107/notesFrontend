@@ -6,12 +6,12 @@ describe('Note app', function() {
       username: 'root',
       password: 'salainen'
     }
-    cy.request('POST', `${Cypress.env('BACKEND')}/users`, user)
-    cy.visit('')
+    cy.request('POST', `${Cypress.env('BACKEND')}/api/users`, user)
+    cy.visit('http://localhost:5173/')
   })
 
   it('front page can be opened', function() {
-    cy.visit('')
+    cy.visit('http://localhost:5173/')
     cy.contains('Notes')
     cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
   })
