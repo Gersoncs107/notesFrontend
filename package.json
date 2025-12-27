@@ -11,6 +11,7 @@
     "test": "jest",
     "eslint": "eslint .",
     "cypress:open": "cypress open",
+    "cy:open": "cypress open",
     "cy:run": "cypress run",
 
     "test:e2e": "start-server-and-test dev http://localhost:5173 cy:open"
