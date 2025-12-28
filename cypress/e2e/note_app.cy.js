@@ -36,13 +36,22 @@ describe('Note app', function() {
       cy.login({ username: 'root', password: 'salainen' })
     })
 
-    it('a new note can be created', function() {
-      cy.contains('new note').click()
-      cy.get('#note-input').should('be.visible')
-      cy.get('#note-input').type('a note created by cypress')
-      cy.contains('save').click()
-      cy.contains('a note created by cypress')
+    describe('and several notes exist', function () {
+    beforeEach(function () {
+      cy.createNote({ content: 'first note', important: false })
+      cy.createNote({ content: 'second note', important: false })
+      cy.createNote({ content: 'third note', important: false })
     })
+
+    it('one of those can be made important', function () {
+      cy.contains('second note')
+        .contains('make important')
+        .click()
+
+      cy.contains('second note')
+        .contains('make not important')
+    })
+  })
 
     describe('and a note exists', function () {
       beforeEach(function () {
