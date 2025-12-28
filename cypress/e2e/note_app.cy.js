@@ -7,22 +7,22 @@ describe('Note app', function() {
       password: 'salainen'
     }
     cy.request('POST', `${Cypress.env('BACKEND')}/api/users`, user)
-   cy.visit('')
+    cy.visit('')
   })
 
   it('front page can be opened', function() {
-   cy.visit('')
+    cy.visit('')
     cy.contains('Notes')
     cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
   })
 
    it('login form can be opened', function() {
-   cy.visit('')
+    cy.visit('')
     cy.contains('log in').click()
   })
 
   it('user can login', function() {
-   cy.visit('')
+    cy.visit('')
     cy.contains('log in').click()
     cy.get('#username').type('root')
     cy.get('#password').type('salainen')
