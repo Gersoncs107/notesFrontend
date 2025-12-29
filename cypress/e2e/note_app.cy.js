@@ -84,17 +84,17 @@ describe('Note app', function () {
   })
 
   // Teste comentado de login com senha errada (descomente quando quiser testar)
-  // it('login fails with wrong password', function () {
-  //   cy.contains('log in').click()
-  //   cy.get('#username').type('root')
-  //   cy.get('#password').type('wrong')
-  //   cy.get('#login-button').click()
+  it('login fails with wrong password', function () {
+    cy.contains('log in').click()
+    cy.get('#username').type('root')
+    cy.get('#password').type('wrong')
+    cy.get('#login-button').click()
 
-  //   cy.get('.error')
-  //     .should('contain', 'wrong credentials')
-  //     .and('have.css', 'color', 'rgb(255, 0, 0)')
-  //     .and('have.css', 'border-style', 'solid')
+    cy.get('.error')
+      .should('contain', 'wrong credentials')
+      .and('have.css', 'color', 'rgb(255, 0, 0)')
+      .and('have.css', 'border-style', 'solid')
 
-  //   cy.get('html').should('not.contain', 'Superuser logged in')
-  // })
+    cy.get('html').should('not.contain', 'Superuser logged in')
+  })
 })
