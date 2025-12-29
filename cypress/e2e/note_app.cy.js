@@ -97,4 +97,11 @@ describe('Note app', function () {
 
     cy.get('html').should('not.contain', 'Superuser logged in')
   })
+
+    it.only('then example', function() {
+    cy.get('button').then( buttons => {
+      console.log('number of buttons', buttons.length)
+      cy.wrap(buttons[0]).click()
+    })
+  })
 })
