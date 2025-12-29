@@ -1,5 +1,5 @@
-describe('Note app', function() {
-  beforeEach(function() {
+describe('Note app', function () {
+  beforeEach(function () {
     cy.request('POST', `${Cypress.env('BACKEND')}/api/testing/reset`)
     const user = {
       name: 'Superuser',
@@ -10,19 +10,16 @@ describe('Note app', function() {
     cy.visit('')
   })
 
-  it('front page can be opened', function() {
-    cy.visit('')
+  it('front page can be opened', function () {
     cy.contains('Notes')
     cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
   })
 
-   it('login form can be opened', function() {
-    cy.visit('')
+  it('login form can be opened', function () {
     cy.contains('log in').click()
   })
 
-  it('user can login', function() {
-    cy.visit('')
+  it('user can login', function () {
     cy.contains('log in').click()
     cy.get('#username').type('root')
     cy.get('#password').type('salainen')
@@ -31,51 +28,63 @@ describe('Note app', function() {
     cy.contains('Superuser logged in')
   })
 
-  describe('when logged in', function() {
-    beforeEach(function() {
+  describe('when logged in', function () {
+    beforeEach(function () {
       cy.login({ username: 'root', password: 'salainen' })
     })
 
+    it('a new note can be created', function () {
+      cy.contains('button', 'new note').should('be.visible').click()
+      cy.contains('button', 'cancel').should('be.visible') // garante que o form abriu
+
+      cy.get('#note-input').type('a note created by cypress')
+      cy.contains('button', 'save').click()
+
+      cy.contains('li.note', 'a note created by cypress')
+    })
+
+    describe('and a note exists', function () {
+      beforeEach(function () {
+        cy.createNote({
+          content: 'another note cypress',
+          important: true
+        })
+      })
+
+      it('it can be made not important', function () {
+        cy.contains('li.note', 'another note cypress')
+          .find('button')
+          .should('have.text', 'make not important')
+          .click()
+
+        cy.contains('li.note', 'another note cypress')
+          .find('button')
+          .should('have.text', 'make important')
+      })
+    })
+
     describe('and several notes exist', function () {
-    beforeEach(function () {
-      cy.createNote({ content: 'first note', important: false })
-      cy.createNote({ content: 'second note', important: false })
-      cy.createNote({ content: 'third note', important: false })
-    })
+      beforeEach(function () {
+        cy.createNote({ content: 'first note', important: false })
+        cy.createNote({ content: 'second note', important: false })
+        cy.createNote({ content: 'third note', important: false })
+      })
 
-    it('one of those can be made important', function () {
-      cy.contains('second note')
-        .contains('make important')
-        .click()
+      it('one of those can be made important', function () {
+        cy.contains('li.note', 'second note')
+          .find('button')
+          .should('have.text', 'make important')
+          .click()
 
-      cy.contains('second note')
-        .contains('make important')
-    })
-  })
-
-   describe('and a note exists', function () {
-  beforeEach(function () {
-    cy.createNote({
-      content: 'another note cypress',
-      important: true
+        cy.contains('li.note', 'second note')
+          .find('button')
+          .should('have.text', 'make not important')
+      })
     })
   })
 
-  it('it can be made not important', function () {
-    cy.contains('li.note', 'another note cypress')  // Localiza o <li> que contém o texto da nota
-      .find('button')  // Encontra o botão dentro desse <li>
-      .should('have.text', 'make not important')  // Assertiva para confirmar o texto (melhor que contains para exatidão)
-      .click()  // Clique
-
-    cy.contains('li.note', 'another note cypress')
-      .find('button')
-      .should('have.text', 'make important')  // Verifica a mudança após o clique
-  })
-})
-  })
-
-  // it.only('login fails with wrong password', function() {
-  //  cy.visit('')
+  // Teste comentado de login com senha errada (descomente quando quiser testar)
+  // it('login fails with wrong password', function () {
   //   cy.contains('log in').click()
   //   cy.get('#username').type('root')
   //   cy.get('#password').type('wrong')
@@ -89,5 +98,3 @@ describe('Note app', function() {
   //   cy.get('html').should('not.contain', 'Superuser logged in')
   // })
 })
-
-//npm run cypress:open
