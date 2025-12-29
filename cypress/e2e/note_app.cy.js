@@ -53,23 +53,25 @@ describe('Note app', function() {
     })
   })
 
-    describe('and a note exists', function () {
-      beforeEach(function () {
-        cy.createNote({
-          content: 'another note cypress',
-          important: true
-        })
-      })
-
-      it('it can be made not important', function () {
-        cy.contains('another note cypress')
-          .contains('make not important')
-          .click()
-
-        cy.contains('another note cypress')
-          .contains('make important')
-      })
+   describe('and a note exists', function () {
+  beforeEach(function () {
+    cy.createNote({
+      content: 'another note cypress',
+      important: true
     })
+  })
+
+  it('it can be made not important', function () {
+    cy.contains('li.note', 'another note cypress')  // Localiza o <li> que contém o texto da nota
+      .find('button')  // Encontra o botão dentro desse <li>
+      .should('have.text', 'make not important')  // Assertiva para confirmar o texto (melhor que contains para exatidão)
+      .click()  // Clique
+
+    cy.contains('li.note', 'another note cypress')
+      .find('button')
+      .should('have.text', 'make important')  // Verifica a mudança após o clique
+  })
+})
   })
 
   // it.only('login fails with wrong password', function() {
