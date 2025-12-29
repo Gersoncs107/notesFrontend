@@ -49,7 +49,7 @@ describe('Note app', function() {
         .click()
 
       cy.contains('second note')
-        .contains('make not important')
+        .contains('make important')
     })
   })
 
